@@ -1,0 +1,12 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+   <persistence-unit name="connectNails">
+     <description>My Persistence Unit</description>
+     <jta-data-source>connectGestionaleNails</jta-data-source>       <!-- nome unit-name da utilizzare nell'annotation @PersistenceContext -->
+     <properties>
+        <property name="openejb.jpa.auto-scan" value="true"/>     <!-- dice al server all avvio di controllare tutte le classi che hanno l'annotation @Entity -->
+        
+     </properties>
+   </persistence-unit>
+
+</persistence>

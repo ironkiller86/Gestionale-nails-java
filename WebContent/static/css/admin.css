@@ -1,0 +1,32 @@
+@charset "ISO-8859-1";
+#left {
+    width: 250px;
+    margin-top: 45px;
+    position: absolute;
+
+}
+
+#search {
+ margin-right: 490px;
+}
+
+#main {
+	position: absolute;
+    margin-left: 387px;
+    margin-top: 43px;
+    width: 1174px;
+    height: 501px;
+   
+    }
+    
+#sfondo {
+    background-image: url('admin.jpg');    
+ 
+    
+@media screen and (min-width: 100px) and (max-width: 1500px) {
+    #main {
+        width: 800px;
+     
+      
+    }
+ } 
