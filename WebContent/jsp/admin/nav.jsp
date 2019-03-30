@@ -5,25 +5,34 @@
    <div id="left" class="list-group">
   <ul class="list-group text-center">
   <li class="list-group-item list-group-item-dark">
-    <a class="nav-link" href="adminController?page=homePage">Home </a>
+    <abbr title="Torna alla Home">
+     <a class="nav-link" href="adminController?page=homePage">
+       <img src="static/images/go-home.png"  alt="Home"> 
+     </a>
+    </abbr>
+    
+  </li>
+   <li class="list-group-item list-group-item-dark">
+     <abbr title="Visualizza tutti gli utenti">
+      <button type="button" class="btn btn-link btn-sm " id="allUsers">
+          <img src="static/images/userList.png"  alt="AllUsers"> 
+      </button>
+     </abbr>
   </li>
   <li class="list-group-item list-group-item-dark">
-     <a class="nav-link text-success" href="adminController?page=userCreation">Crea Nuovo Utente </a>
+     <abbr title="Crea un Nuovo Utente">
+      <a class="nav-link text-success" href="adminController?page=userCreation">
+        <img src="static/images/addUser.png"  alt="Crea Utente"> 
+     </a>
+    </abbr>
   </li>
   <li class="list-group-item list-group-item-dark">
     <abbr title="Effettua il Logout">
-      <button type="button" class="btn btn-light btn-sm " id="logOut">
-          <img src="static/images/door.png"  alt="Logout"> 
+      <button type="button" class="btn btn-link btn-sm " id="logOut">
+          <img src="static/images/exit.png"  alt="Logout"> 
       </button>
     </abbr> 
   </li>
-  <li class="list-group-item list-group-item-dark">This is a secondary list group item</li>
-  <li class="list-group-item list-group-item-dark">This is a success list group item</li>
-  <li class="list-group-item list-group-item-dark">This is a danger list group item</li>
-  <li class="list-group-item list-group-item-dark">This is a warning list group item</li>
-  <li class="list-group-item list-group-item-dark">This is a info list group item</li>
-  <li class="list-group-item list-group-item-dark">This is a light list group item</li>
-  <li class="list-group-item list-group-item-dark">This is a dark list group item</li>
 </ul>
 </div>
 </nav>

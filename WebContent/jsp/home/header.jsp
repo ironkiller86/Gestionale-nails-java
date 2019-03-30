@@ -33,8 +33,11 @@
     <script type="text/javascript" src="static/js/function.js"></script>
     <script type="text/javascript" src="static/js/altro.js"></script> 
     <script type="text/javascript" src="static/js/function_one.js"></script>
-     <script type="text/javascript" src="static/js/utility.js"></script>
+    <script type="text/javascript" src="static/js/utility.js"></script>
+    <!-- funzione controlli Creazione user -->
+     <script type="text/javascript" src="static/js/closeBrowser.js"></script>   
      <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/static/css/img.css"%>"> 
+    
 
 
 
@@ -87,30 +90,7 @@
                                   }
             			}
             			});
-            	//var cliente = callback();
             	
-            	
-            	
-            		
-                /* var cliente = prompt('Ricerca Cliente:');
-                   if (cliente) {
-                       var jsonClt = {name: cliente};
-                    	console.log(jsonClt);
-                    	   
-                        $.ajax({
-                       	  async:false,
-                       	  contentType: "application/json",
-                             type:"POST",
-                             url:"customer?action=single_search",
-                             dataType:"json",
-                             data: JSON.stringify(jsonClt)
-                        });
-                    	
-                        window.location.href ='customer?action=customer_search';
-                    	
-                        //true // make the event "stick"
-                      
-                        }*/
                        
                     },
                             editable: true,
@@ -166,7 +146,8 @@
   <header>
    <nav class="navbar navbar-expand-sm navbar navbar-dark bg-dark" > 
    <c:if test="${sessionScope.userLog != null }">
-     <p class="navbar-brand">Utente: ${userLog.getUsername().toUpperCase()}</p>
+     <p style="color:gray; text-indent: 5px; margin-top: 16px;" class="navbar-brand">Utente:</p>
+     <p class="navbar-brand" style="color:green; text-indent: 5px; margin-top: 16px;"> ${userLog.getCognome()}   ${userLog.getNome()}</p>
    </c:if>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">

@@ -60,11 +60,10 @@
      </div>
      <div class="form-row col-md-9 ml-md-auto ">
        <div class="form-group col-md-3"> 
-        <input type="submit" value="salva">
+        <input id="img" type="submit" value="salva">
          
        </div>
      </div> 
-     <script type="text/javascript"></script>
   </form>
   
 

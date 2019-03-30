@@ -3,6 +3,8 @@ package it.gestionalenails.web;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Properties;
 
 import javax.ejb.EJB;
@@ -89,18 +91,34 @@ public class LoginValidation extends HttpServlet {
 		String password = request.getParameter("password".trim());
 		if(userService.userValidation(userName,password) != null) {
 			Utente utn = userService.userValidation(userName,password);
-			Utente user = new Utente();  
+			Utente user = new Utente(); 
 			user.setId(utn.getId());
 			user.setPassword(utn.getPassword());
 			user.setUsername(utn.getUsername());
+			user.setCognome(utn.getCognome());
+			user.setNome(utn.getNome());
+			user.setIndirizzo(utn.getIndirizzo());
+			user.setCittaResidenza(utn.getCittaResidenza());
+			user.setCap(utn.getCap());
+			user.setEmail(utn.getEmail());
+			user.setTelefono(utn.getTelefono());
+			user.setDataAttiv(utn.getDataAttiv());
+			user.setDataScad(utn.getDataScad());
 			user.setRole(utn.isRole());
-			Cookie cookie = new Cookie("cookie","1");
-			response.addCookie(cookie);
-			request.getSession().setAttribute("userLog", user);
-			response.sendRedirect("dispatcher?page=home");
+            if(user.getDataScad().after(Calendar.getInstance())) {
+				Cookie cookie = new Cookie("cookie","1");
+				response.addCookie(cookie);
+				request.getSession().setAttribute("userLog", user);
+				System.out.println(user.getCognome() + " aggiunto");
+				
+				response.sendRedirect("dispatcher?page=home");
+			}
+			else if (user.getDataScad().before(Calendar.getInstance())) {
+				request.getSession().setAttribute("flag", "endLicenze");
+				response.sendRedirect("/gestionale-nails");
+			}
 		}
 		else {
-
 			response.sendRedirect("/gestionale-nails?message=error/");
 		}
 	}

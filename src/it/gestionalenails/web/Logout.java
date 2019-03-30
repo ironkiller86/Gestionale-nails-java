@@ -30,11 +30,11 @@ public class Logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-	    
+	    session.removeAttribute("userLog");
 		Cookie cookie = new Cookie("cookie","");
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
- 		session.invalidate();
+ 		//session.invalidate();
 	
 		request.getServletContext().getRequestDispatcher("/jsp/LoginPage.jsp").forward(request, response);
 		

@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.gestionalenails.data.Appuntamento;
 import it.gestionalenails.data.Cliente;
+import it.gestionalenails.data.Utente;
 
 public interface CustomerService   {
 
@@ -18,5 +19,6 @@ public interface CustomerService   {
 	public List<Appuntamento> search(long user_Id,String nominative ,String data, boolean isFinish);
 	public Cliente findCustomer(long id);
 	public void deleteAppointment(long id_app);
+	
 	
 }

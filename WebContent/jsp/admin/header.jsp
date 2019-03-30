@@ -7,8 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Pagina Controllo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap CSS -->
-       <link rel="stylesheet" href="static/css/admin.css"> 
+
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -23,7 +22,12 @@
      <script type="text/javascript" src="static/js/logout.js"></script>
 <!-- funzione controlli Creazione user -->
      <script type="text/javascript" src="static/js/controllCreateUser.js"></script>     
-     
+<!-- funzione finestre avvisi user -->
+     <script type="text/javascript" src="static/js/userSave.js"></script>     
+<!-- funzione attiva tasto elimina utenti -->    
+     <script type="text/javascript" src="static/js/function_one.js"></script>          
+<!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="static/css/admin.css">      
 </head>
 <body>
 <header>
@@ -38,10 +42,10 @@
     
   </div>
   <div id="search">
-  <form class="form-inline my-2 my-lg-0" name="customer_search" action="<%=request.getContextPath() + "/customer?action=customer_search" %>" method="POST" >
-      <input class="form-control mr-sm-2" type="search" required="required"  aria-label="Search" name="customer">
+  <form name="creazione utente" class="form-inline my-2 my-lg-0"  action="adminController?action=searchUser" method="POST" >
+      <input class="form-control mr-sm-2" type="search" required="required" name="field" aria-label="Search">
         <abbr title="Effettua ricerca per Cognome, Nome, Numero di telefono o Email">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ricerca cliente</button>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ricerca Utente</button>
         </abbr>
     </form>
     </div>
@@ -51,6 +55,9 @@
     </c:if>
   </div>
 </nav>
+<c:if test="${requestScope.flag != null}">
+   <div id="flag2" style="display:none">${flag}</div>
+</c:if>
 <!-- Dialog logOut -->
 <div id="dialog-logOut" title="LogOut" style="display:none;" >
    <p>
@@ -58,4 +65,11 @@
       Vuoi Uscire dalla Dashboard?
    </p>
 </div> 
+<!-- dialog jquery info ricerca -->
+ <div id="dialog-infoRicerca" title="Avviso" style="display:none;">
+   <p><span class="ui-icon ui-icon-check" style="float:left; margin:12px 12px 20px 0;"></span>
+     Nessuno Utente trovato in base al campo di ricerca!
+   </p>
+</div>
+
 </header>

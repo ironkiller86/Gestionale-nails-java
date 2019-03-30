@@ -21,7 +21,8 @@ import javax.persistence.TemporalType;
 public class Utente implements Serializable {
     
 	private static final long serialVersionUID = -6262147715134625429L;
-	private Integer id;
+	private long id;
+	private Calendar dataCreazione;
     private String cognome;
     private String nome;
     private String codFiscale;
@@ -42,17 +43,31 @@ public class Utente implements Serializable {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_user")
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 	
 	
 	
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
 	
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_creazione",nullable=false)
+	public Calendar getDataCreazione() {
+		return dataCreazione;
+	}
+
+
+
+	public void setDataCreazione(Calendar dataCreazione) {
+		this.dataCreazione = dataCreazione;
+	}
+
+
+
 	@Column(name="username",nullable=false)
 	public String getUsername() {
 		return username;
@@ -235,13 +250,5 @@ public class Utente implements Serializable {
 	public void setRole(boolean role) {
 		this.role = role;
 	}
-
-
-
-	
-    
-    
-   
-    
 
 }

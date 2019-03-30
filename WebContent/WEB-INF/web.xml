@@ -14,10 +14,8 @@
   </session-config>
   <filter-mapping>
     <filter-name>LoginValidation</filter-name>
-    <!-- <url-pattern>/dispatcher/*</url-pattern> -->
     <url-pattern>/businessAppointment/*</url-pattern>
     <url-pattern>/customer/*</url-pattern>
     <url-pattern>/accountingServlet/*</url-pattern>
-    
   </filter-mapping>
 </web-app>

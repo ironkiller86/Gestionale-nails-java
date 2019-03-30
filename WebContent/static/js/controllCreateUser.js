@@ -16,8 +16,57 @@ function upperWord(field){
 }
 
 
-//upercase cognome e controllo
+//active dialog deelete////////////
 $(document).ready(function() {
+	var flag = $("#flag").html();
+	if(flag != undefined && flag === 'delete'){
+		$( "#dialog-delete" ).dialog({
+			resizable: false,
+			height: "auto",
+			width: 400,
+			modal: true,
+			buttons: {
+				OK: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	}
+	
+	/////activate dialog utente non presente in db
+	var flag2 = $("#flag2").html();
+	if(flag2 != undefined && flag2 === 'empy') {
+		$( "#dialog-infoRicerca" ).dialog({
+			resizable: false,
+			height: "auto",
+			width: 400,
+			modal: true,
+			buttons: {
+				OK: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	}
+	
+	var flag3 = $("#flag3").html();
+	if(flag3 != undefined && flag3 === 'endLicenze') {
+		$( "#dialog-endLicenze" ).dialog({
+			resizable: false,
+			height: "auto",
+			width: 400,
+			modal: true,
+			buttons: {
+				OK: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	}
+	
+	
+	////////////////////////////funzioni controllo creazione user//////////////////////////
+
 	$("#cognome").blur(function(){                                 //upercase cognome e controllo
 		var cognome = $("#cognome").val();
 		if(cognome != ''){
@@ -33,14 +82,18 @@ $(document).ready(function() {
 	});
 
 	$("#codFiscale").blur(function(){
+
 		var codFisc = $("#codFiscale").val().trim();
 		if(codFisc != ''){
 			var espressione = new RegExp('^[A-Za-z]{6}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{3}[A-Za-z]{1}$');
 			if(espressione.test(codFisc)){
 				$("#codFiscale").val(codFisc.toUpperCase());
+				$("#codFiscale").css({"border-color":"green","box-shadow":"0px 0px 4px green",});
 				$("button").show();
 			}
 			else {
+				$("#codFiscale").val(codFisc.toUpperCase());
+				$("#codFiscale").css({"border-color":"red","box-shadow":"0px 0px 4px red",});
 				$("button").hide();
 				$( function() {                        
 					$( "#dialog-codFisc" ).dialog({
@@ -56,6 +109,9 @@ $(document).ready(function() {
 					});
 				});
 			}
+		}
+		else {
+			$("#codFiscale").css({"border":"1px solid #ced4da","box-shadow":"none",});
 		}
 	});	
 
@@ -103,8 +159,40 @@ $(document).ready(function() {
 
 	$("#username").blur(function(){                               
 		var username = $("#username").val();
+		var id = $("#idUser").html();                //recupero id dell'utente messo nel div della pagina
 		if(username != '') {
+			var jsonUser = {usr: username, idUser: id};
+			$.ajax({                         //chiamata ajax per creazione user
+				contentType: "application/json",
+				type:"POST",
+				url:"adminController?action=controllUserName",
+				data: JSON.stringify(jsonUser),
+				success: function(response) {
+					console.log(response);
+					if(response == 'inUso'){
+						$("#username").css({"border-color":"red","box-shadow":"0px 0px 4px red",});
+						jQuery("#msg").text('Nome utente gia in uso!');
+						$( "#dialog-success" ).dialog({
+							resizable: false,
+							height: "auto",
+							width: 400,
+							modal: true,
+							buttons: {
+								OK: function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						});
+					}
+					if(response == 'disp'){
+						$("#username").css({"border-color":"green","box-shadow":"0px 0px 4px green",});
+					}
+				}
+			});
 			$("#username").val(username.trim());
+		}
+		else {
+			$("#username").css({"border":"1px solid #ced4da","box-shadow":"none",});
 		}
 	});
 
@@ -135,15 +223,37 @@ $(document).ready(function() {
 			}
 		}
 	});	*/
-	
+
 	$("#password").blur(function(){                               
 		var password = $("#password").val();
 		if(password != '') {
 			$("#password").val(password.trim());
 		}
 	});
-	
-	
+
+
+	$("#allUsers").click(function(){ 
+		$.ajax({                         
+			async:false,
+			contentType: "application/json",
+			type:"GET",
+			url:"adminController?page=searchAllUsers",
+			success: function(response) {
+				console.log(response);
+
+			}
+
+
+
+		});
+
+		window.location.href ='adminController?page=visualAllUser';
+
+	});
+
+
+
+
 
 });
 
